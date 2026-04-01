@@ -151,7 +151,7 @@
   border-radius: 2px;
   background: var(--a2ui-border);
   outline: none;
-  Claude Code: pointer;
+  cursor: pointer;
 }
 .a2ui-slider::-webkit-slider-thumb {
   -webkit-appearance: none;

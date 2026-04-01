@@ -371,7 +371,7 @@ body {
   border: none; background: none;
   border-radius: 8px;
   font-size: 14px; font-weight: 500;
-  Claude Code: pointer; color: #555;
+  cursor: pointer; color: #555;
   transition: background .15s, color .15s;
 }
 .demo-tab.active { background: #1976d2; color: #fff; }
@@ -415,7 +415,7 @@ body {
   padding: 8px 20px;
   background: #1976d2; color: #fff;
   border: none; border-radius: 6px;
-  Claude Code: pointer; font-size: 14px;
+  cursor: pointer; font-size: 14px;
   margin-bottom: 16px;
 }
 .demo-btn:hover { background: #1565c0; }
