@@ -138,4 +138,6 @@ export interface A2UIRendererProps {
   onError?: (err: Error) => void
   /** Client capabilities sent to agent */
   capabilities?: Partial<ClientCapabilities>
+  /** UI theme: 'light' | 'dark' */
+  theme?: string
 }

@@ -61,9 +61,6 @@ const emit = defineEmits<{
   ready:  [surfaceId: string]
 }>()
 
-// Additional props not in interface for convenience
-defineProps<{ theme?: string }>()
-
 // ── State ──────────────────────────────────────────────────────────────────
 
 const { surfaces, dispatch, dispatchAll, updateDataPath, reset } = useA2UIState()

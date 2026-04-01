@@ -13,11 +13,11 @@ import {
   inject,
   type PropType,
 } from 'vue'
-import type { ComponentUpdate, Surface, UserActionMessage } from '../../types'
-import { resolveProps } from '../../utils/boundValue'
-import { get } from '../../utils/jsonPointer'
+import type { ComponentUpdate, Surface, UserActionMessage } from '../types'
+import { resolveProps } from '../utils/boundValue'
+import { get } from '../utils/jsonPointer'
 import { DEFAULT_CATALOG } from './catalog'
-import { A2UI_CONTEXT_KEY, type A2UIContext } from '../A2UIContext'
+import { A2UI_CONTEXT_KEY, type A2UIContext } from './A2UIContext'
 
 export const A2UIComponent = defineComponent({
   name: 'A2UIComponent',
