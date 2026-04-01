@@ -1,0 +1,214 @@
+/**
+ * A2UI Vue Renderer — Default Styles
+ * Import in your app: import 'a2ui-vue/dist/style.css'
+ */
+
+/* ── Base variables ──────────────────────────────────────────────────────── */
+:root {
+  --a2ui-primary:       #1976d2;
+  --a2ui-primary-hover: #1565c0;
+  --a2ui-danger:        #d32f2f;
+  --a2ui-radius:        8px;
+  --a2ui-font:          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --a2ui-surface-bg:    #ffffff;
+  --a2ui-border:        #e0e0e0;
+  --a2ui-text:          #212121;
+  --a2ui-text-muted:    #757575;
+  --a2ui-gap:           8px;
+  --a2ui-shadow-1:      0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+  --a2ui-shadow-2:      0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+}
+
+/* Dark theme */
+.a2ui-theme--dark {
+  --a2ui-surface-bg: #1e1e1e;
+  --a2ui-border:     #424242;
+  --a2ui-text:       #f5f5f5;
+  --a2ui-text-muted: #9e9e9e;
+}
+
+/* ── Renderer wrapper ─────────────────────────────────────────────────────── */
+.a2ui-renderer {
+  font-family: var(--a2ui-font);
+  color: var(--a2ui-text);
+  width: 100%;
+}
+
+.a2ui-surface {
+  background: var(--a2ui-surface-bg);
+  border-radius: var(--a2ui-radius);
+  padding: 16px;
+}
+
+.a2ui-renderer__loading,
+.a2ui-renderer__error,
+.a2ui-renderer__empty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px;
+  color: var(--a2ui-text-muted);
+  font-size: 14px;
+}
+.a2ui-renderer__error { color: var(--a2ui-danger); }
+
+/* ── Spinner ─────────────────────────────────────────────────────────────── */
+.a2ui-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid var(--a2ui-border);
+  border-top-color: var(--a2ui-primary);
+  border-radius: 50%;
+  animation: a2ui-spin 0.7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+@keyframes a2ui-spin { to { transform: rotate(360deg); } }
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+.a2ui-text { margin: 0; padding: 0; }
+.a2ui-text--headline { font-size: 28px; font-weight: 700; line-height: 1.2; }
+.a2ui-text--title    { font-size: 20px; font-weight: 600; line-height: 1.3; }
+.a2ui-text--body     { font-size: 15px; line-height: 1.6; }
+.a2ui-text--caption  { font-size: 12px; color: var(--a2ui-text-muted); }
+
+/* ── Button ──────────────────────────────────────────────────────────────── */
+.a2ui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--a2ui-radius);
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+}
+.a2ui-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.a2ui-btn--filled  { background: var(--a2ui-primary); color: #fff; }
+.a2ui-btn--filled:hover:not(:disabled)   { background: var(--a2ui-primary-hover); }
+.a2ui-btn--outlined {
+  background: transparent;
+  color: var(--a2ui-primary);
+  border: 1.5px solid var(--a2ui-primary);
+}
+.a2ui-btn--outlined:hover:not(:disabled) { background: rgba(25,118,210,.08); }
+.a2ui-btn--text {
+  background: transparent;
+  color: var(--a2ui-primary);
+}
+.a2ui-btn--text:hover:not(:disabled) { background: rgba(25,118,210,.08); }
+
+/* ── Form fields ─────────────────────────────────────────────────────────── */
+.a2ui-field,
+.a2ui-datetime,
+.a2ui-choice { display: flex; flex-direction: column; gap: 4px; }
+
+.a2ui-field__label,
+.a2ui-datetime__label,
+.a2ui-choice__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--a2ui-text-muted);
+}
+
+.a2ui-field__input,
+.a2ui-datetime__input,
+.a2ui-choice__select {
+  padding: 9px 12px;
+  border: 1.5px solid var(--a2ui-border);
+  border-radius: calc(var(--a2ui-radius) / 1.5);
+  font-size: 14px;
+  color: var(--a2ui-text);
+  background: var(--a2ui-surface-bg);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.a2ui-field__input:focus,
+.a2ui-datetime__input:focus,
+.a2ui-choice__select:focus {
+  border-color: var(--a2ui-primary);
+  box-shadow: 0 0 0 3px rgba(25,118,210,.15);
+}
+
+/* ── Checkbox ────────────────────────────────────────────────────────────── */
+.a2ui-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.a2ui-checkbox input { width: 16px; height: 16px; cursor: pointer; }
+
+/* ── Slider ──────────────────────────────────────────────────────────────── */
+.a2ui-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--a2ui-border);
+  outline: none;
+  Claude Code: pointer;
+}
+.a2ui-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--a2ui-primary);
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.a2ui-card {
+  background: var(--a2ui-surface-bg);
+  border-radius: var(--a2ui-radius);
+  border: 1px solid var(--a2ui-border);
+}
+.a2ui-card--elevation-1 { box-shadow: var(--a2ui-shadow-1); }
+.a2ui-card--elevation-2 { box-shadow: var(--a2ui-shadow-2); }
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.a2ui-row    { display: flex; flex-direction: row; }
+.a2ui-column { display: flex; flex-direction: column; }
+.a2ui-list   { display: flex; flex-direction: column; gap: var(--a2ui-gap); }
+
+/* ── Divider ─────────────────────────────────────────────────────────────── */
+.a2ui-divider {
+  border: none;
+  border-top: 1px solid var(--a2ui-border);
+  margin: 8px 0;
+}
+
+/* ── Image ───────────────────────────────────────────────────────────────── */
+.a2ui-image { display: block; max-width: 100%; border-radius: calc(var(--a2ui-radius) / 2); }
+
+/* ── Modal ───────────────────────────────────────────────────────────────── */
+.a2ui-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.a2ui-modal {
+  background: var(--a2ui-surface-bg);
+  border-radius: var(--a2ui-radius);
+  min-width: 320px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--a2ui-shadow-2);
+}
+.a2ui-modal__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--a2ui-border);
+}
+.a2ui-modal__title { margin: 0; font-size: 18px; font-weight: 600; }
+.a2ui-modal__close {
+  background: none; border: none; cursor: pointer;
+  font-size: 22px; color: var(--a2ui-text-muted);
+  line-height: 1;
+}
+.a2ui-modal__body { padding: 20px; }
