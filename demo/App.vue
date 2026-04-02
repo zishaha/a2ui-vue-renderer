@@ -4,8 +4,12 @@
     <div v-if="toast" :class="['demo-toast', toast.startsWith('⚠️') ? 'demo-toast--warn' : '']">{{ toast }}</div>
 
     <header class="demo-header">
+      <div class="lang-switcher">
+        <button @click="lang = 'en'" :class="{ active: lang === 'en' }">EN</button>
+        <button @click="lang = 'zh'" :class="{ active: lang === 'zh' }">中文</button>
+      </div>
       <h1>🦾 A2UI Vue Renderer — Demo</h1>
-      <p>Vue 3 implementation of the A2UI Agent-to-User Interface protocol</p>
+      <p>{{ t.subtitle }}</p>
     </header>
 
     <div class="demo-tabs">
@@ -21,27 +25,27 @@
       <!-- Static messages demo -->
       <section v-if="activeTab === 'flight'" class="demo-section">
         <div class="demo-header-section">
-          <h2>✈️ Flight Booking Form</h2>
+          <h2>{{ t.flight.title }}</h2>
           <p class="demo-desc">
-            Simulates an Agent response that generates a flight booking UI with form inputs.
+            {{ t.flight.desc }}
           </p>
         </div>
 
         <div class="demo-features">
           <div class="feature-card">
             <div class="feature-icon">📝</div>
-            <div class="feature-title">Form Components</div>
-            <div class="feature-desc">TextField, DateTimeInput, ChoicePicker</div>
+            <div class="feature-title">{{ t.flight.features.form.title }}</div>
+            <div class="feature-desc">{{ t.flight.features.form.desc }}</div>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🎯</div>
-            <div class="feature-title">Static Layout</div>
-            <div class="feature-desc">explicitList children with literal values</div>
+            <div class="feature-title">{{ t.flight.features.layout.title }}</div>
+            <div class="feature-desc">{{ t.flight.features.layout.desc }}</div>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🔘</div>
-            <div class="feature-title">Action Handling</div>
-            <div class="feature-desc">Button with actionId for form submission</div>
+            <div class="feature-title">{{ t.flight.features.action.title }}</div>
+            <div class="feature-desc">{{ t.flight.features.action.desc }}</div>
           </div>
         </div>
 
@@ -51,33 +55,33 @@
             @action="onAction"
           />
         </div>
-        <pre class="demo-log" v-if="lastAction">Last action: {{ JSON.stringify(lastAction, null, 2) }}</pre>
+        <pre class="demo-log" v-if="lastAction">{{ t.lastAction }} {{ JSON.stringify(lastAction, null, 2) }}</pre>
       </section>
 
       <!-- Product comparison demo -->
       <section v-if="activeTab === 'product'" class="demo-section">
         <div class="demo-header-section">
-          <h2>🛍️ Product List (Dynamic Template)</h2>
+          <h2>{{ t.product.title }}</h2>
           <p class="demo-desc">
-            Demonstrates dynamic list rendering from data arrays using template-based repetition.
+            {{ t.product.desc }}
           </p>
         </div>
 
         <div class="demo-features">
           <div class="feature-card">
             <div class="feature-icon">🔄</div>
-            <div class="feature-title">Template Children</div>
-            <div class="feature-desc">Repeat component per array item</div>
+            <div class="feature-title">{{ t.product.features.template.title }}</div>
+            <div class="feature-desc">{{ t.product.features.template.desc }}</div>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🔗</div>
-            <div class="feature-title">Data Binding</div>
-            <div class="feature-desc">JSON Pointer paths to data model</div>
+            <div class="feature-title">{{ t.product.features.binding.title }}</div>
+            <div class="feature-desc">{{ t.product.features.binding.desc }}</div>
           </div>
           <div class="feature-card">
             <div class="feature-icon">⚡</div>
-            <div class="feature-title">Dynamic UI</div>
-            <div class="feature-desc">UI generated from data structure</div>
+            <div class="feature-title">{{ t.product.features.dynamic.title }}</div>
+            <div class="feature-desc">{{ t.product.features.dynamic.desc }}</div>
           </div>
         </div>
 
@@ -92,27 +96,27 @@
       <!-- Data binding demo -->
       <section v-if="activeTab === 'form'" class="demo-section">
         <div class="demo-header-section">
-          <h2>📝 Survey Form (Two-Way Binding)</h2>
+          <h2>{{ t.form.title }}</h2>
           <p class="demo-desc">
-            Demonstrates reactive data binding and real-time form state management.
+            {{ t.form.desc }}
           </p>
         </div>
 
         <div class="demo-features">
           <div class="feature-card">
             <div class="feature-icon">↔️</div>
-            <div class="feature-title">Bidirectional Binding</div>
-            <div class="feature-desc">Form inputs sync with data model</div>
+            <div class="feature-title">{{ t.form.features.bidirectional.title }}</div>
+            <div class="feature-desc">{{ t.form.features.bidirectional.desc }}</div>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🔄</div>
-            <div class="feature-title">Reactive Updates</div>
-            <div class="feature-desc">Live data model changes</div>
+            <div class="feature-title">{{ t.form.features.reactive.title }}</div>
+            <div class="feature-desc">{{ t.form.features.reactive.desc }}</div>
           </div>
           <div class="feature-card">
             <div class="feature-icon">✅</div>
-            <div class="feature-title">State Management</div>
-            <div class="feature-desc">Form validation and submission</div>
+            <div class="feature-title">{{ t.form.features.state.title }}</div>
+            <div class="feature-desc">{{ t.form.features.state.desc }}</div>
           </div>
         </div>
 
@@ -126,15 +130,15 @@
 
       <!-- Protocol inspector -->
       <section v-if="activeTab === 'inspector'" class="demo-section">
-        <h2>🔍 Protocol Message Inspector</h2>
-        <p class="demo-desc">Paste A2UI JSONL messages below and see them rendered live.</p>
+        <h2>{{ t.inspector.title }}</h2>
+        <p class="demo-desc">{{ t.inspector.desc }}</p>
         <textarea
           v-model="customJsonl"
           class="demo-jsonl"
           placeholder='{"type":"beginRendering","surfaceId":"s1","rootComponentId":"root"}
 {"type":"surfaceUpdate","surfaceId":"s1","components":[{"id":"root","type":"Column","children":{"explicitList":["t1"]}},{"id":"t1","type":"Text","text":{"literalString":"Hello from A2UI!"}}]}'
         />
-        <button class="demo-btn" @click="applyCustom">▶ Render</button>
+        <button class="demo-btn" @click="applyCustom">{{ t.inspector.button }}</button>
         <div class="demo-renderer" v-if="customMessages.length">
           <A2UIRenderer :messages="customMessages" @action="onAction" />
         </div>
@@ -144,7 +148,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { A2UIRenderer } from 'a2ui-vue'
 import type { A2UIMessage, UserActionMessage } from 'a2ui-vue'
 
@@ -153,26 +157,121 @@ const lastAction = ref<UserActionMessage | null>(null)
 const customJsonl = ref('')
 const customMessages = ref<A2UIMessage[]>([])
 const toast = ref<string | null>(null)
+const lang = ref<'en' | 'zh'>('en')
 
-const tabs = [
-  { id: 'flight',    label: '✈️ Flight Booking' },
-  { id: 'product',   label: '🛍️ Product List' },
-  { id: 'form',      label: '📝 Survey Form' },
-  { id: 'inspector', label: '🔍 Inspector' },
-]
+// Translations
+const translations = {
+  en: {
+    subtitle: 'Interactive UI protocol for AI agents — live examples',
+    tabs: {
+      flight: '✈️ Flight Booking',
+      product: '🛍️ Product List',
+      form: '📝 Survey Form',
+      inspector: '🔍 Inspector',
+    },
+    flight: {
+      title: '✈️ Flight Booking Form',
+      desc: 'Simulates an Agent response that generates a flight booking UI with form inputs.',
+      features: {
+        form: { title: 'Form Components', desc: 'TextField, DateTimeInput, ChoicePicker' },
+        layout: { title: 'Static Layout', desc: 'explicitList children with literal values' },
+        action: { title: 'Action Handling', desc: 'Button with actionId for form submission' },
+      },
+    },
+    product: {
+      title: '🛍️ Product List (Dynamic Template)',
+      desc: 'Demonstrates dynamic list rendering from data arrays using template-based repetition.',
+      features: {
+        template: { title: 'Template Children', desc: 'Repeat component per array item' },
+        binding: { title: 'Data Binding', desc: 'JSON Pointer paths to data model' },
+        dynamic: { title: 'Dynamic UI', desc: 'UI generated from data structure' },
+      },
+    },
+    form: {
+      title: '📝 Survey Form (Two-Way Binding)',
+      desc: 'Demonstrates reactive data binding and real-time form state management.',
+      features: {
+        bidirectional: { title: 'Bidirectional Binding', desc: 'Form inputs sync with data model' },
+        reactive: { title: 'Reactive Updates', desc: 'Live data model changes' },
+        state: { title: 'State Management', desc: 'Form validation and submission' },
+      },
+    },
+    inspector: {
+      title: '🔍 Protocol Message Inspector',
+      desc: 'Paste A2UI JSONL messages below and see them rendered live.',
+      button: '▶ Render',
+    },
+    lastAction: 'Last action:',
+    toastButtonClicked: '✅ Button clicked:',
+    toastEmptyInput: '⚠️ Please enter JSONL message content first',
+  },
+  zh: {
+    subtitle: 'AI 智能体交互式 UI 协议 — 实时示例',
+    tabs: {
+      flight: '✈️ 航班预订',
+      product: '🛍️ 产品列表',
+      form: '📝 问卷调查',
+      inspector: '🔍  协议检查器',
+    },
+    flight: {
+      title: '✈️ 航班预订表单',
+      desc: '模拟智能体响应，生成带有表单输入的航班预订界面。',
+      features: {
+        form: { title: '表单组件', desc: 'TextField、DateTimeInput、ChoicePicker' },
+        layout: { title: '静态布局', desc: '使用 explicitList 子元素和字面值' },
+        action: { title: '动作处理', desc: '带有 actionId 的按钮用于表单提交' },
+      },
+    },
+    product: {
+      title: '🛍️ 产品列表（动态模板）',
+      desc: '演示使用基于模板的重复从数据数组动态渲染列表。',
+      features: {
+        template: { title: '模板子元素', desc: '为每个数组项重复组件' },
+        binding: { title: '数据绑定', desc: 'JSON Pointer 路径指向数据模型' },
+        dynamic: { title: '动态 UI', desc: '从数据结构生成 UI' },
+      },
+    },
+    form: {
+      title: '📝 问卷调查（双向绑定）',
+      desc: '演示响应式数据绑定和实时表单状态管理。',
+      features: {
+        bidirectional: { title: '双向绑定', desc: '表单输入与数据模型同步' },
+        reactive: { title: '响应式更新', desc: '实时数据模型变化' },
+        state: { title: '状态管理', desc: '表单验证和提交' },
+      },
+    },
+    inspector: {
+      title: '🔍 协议消息检查器',
+      desc: '在下方粘贴 A2UI JSONL 消息，实时查看渲染效果。',
+      button: '▶ 渲染',
+    },
+    lastAction: '最后操作：',
+    toastButtonClicked: '✅ 按钮已点击：',
+    toastEmptyInput: '⚠️ 请先输入 JSONL 消息内容',
+  },
+}
+
+const t = computed(() => translations[lang.value])
+
+const tabs = computed(() => [
+  { id: 'flight',    label: t.value.tabs.flight },
+  { id: 'product',   label: t.value.tabs.product },
+  { id: 'form',      label: t.value.tabs.form },
+  { id: 'inspector', label: t.value.tabs.inspector },
+])
 
 function onAction(action: UserActionMessage) {
   lastAction.value = action
   console.log('[A2UI Demo] Action received:', action)
 
   // Show toast notification
-  toast.value = `✅ Button clicked: ${action.actionId}`
+  toast.value = `${t.value.toastButtonClicked} ${action.actionId}`
   setTimeout(() => { toast.value = null }, 3000)
 }
 
 function applyCustom() {
   if (!customJsonl.value.trim()) {
-    toast.value = '⚠️ 请先输入 JSONL 消息内容'
+    toast.value = t.value.toastEmptyInput
     setTimeout(() => { toast.value = null }, 3000)
     return
   }
@@ -440,9 +539,36 @@ body {
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-.demo-header { text-align: center; margin-bottom: 32px; }
+.demo-header { text-align: center; margin-bottom: 32px; position: relative; }
 .demo-header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
 .demo-header p  { color: #666; font-size: 15px; }
+
+.lang-switcher {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 4px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.lang-switcher button {
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #555;
+  transition: background .15s, color .15s;
+}
+.lang-switcher button.active {
+  background: #1976d2;
+  color: #fff;
+}
 
 .demo-tabs {
   display: flex; gap: 4px;
