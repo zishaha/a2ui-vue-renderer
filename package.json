@@ -18,6 +18,7 @@
     "dev":   "vite",
     "build": "vite build",
     "demo":  "vite --config vite.demo.config.js",
+    "build:demo": "vite build --config vite.demo.config.js",
     "test":  "vitest run",
     "test:watch": "vitest"
   },

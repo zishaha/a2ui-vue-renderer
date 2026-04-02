@@ -6,7 +6,7 @@ import { resolve } from 'path'
 export default defineConfig({
   plugins: [vue()],
   root: resolve(__dirname, 'demo'),
-  base: '/a2ui-vue-renderer/',
+  base: process.env.NODE_ENV === 'production' ? '/a2ui-vue-renderer/' : '/',
   resolve: {
     alias: { 'a2ui-vue': resolve(__dirname, 'src/index.ts') },
   },
