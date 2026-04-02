@@ -1,7 +1,7 @@
 <template>
   <div class="demo-app">
     <!-- Toast notification -->
-    <div v-if="toast" class="demo-toast">{{ toast }}</div>
+    <div v-if="toast" :class="['demo-toast', toast.startsWith('⚠️') ? 'demo-toast--warn' : '']">{{ toast }}</div>
 
     <header class="demo-header">
       <h1>🦾 A2UI Vue Renderer — Demo</h1>
@@ -171,6 +171,11 @@ function onAction(action: UserActionMessage) {
 }
 
 function applyCustom() {
+  if (!customJsonl.value.trim()) {
+    toast.value = '⚠️ 请先输入 JSONL 消息内容'
+    setTimeout(() => { toast.value = null }, 3000)
+    return
+  }
   try {
     customMessages.value = customJsonl.value
       .split('\n')
@@ -429,6 +434,7 @@ body {
   font-size: 15px; font-weight: 500; z-index: 9999;
   animation: slideDown 0.3s ease;
 }
+.demo-toast--warn { background: #f59e0b; }
 @keyframes slideDown {
   from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
