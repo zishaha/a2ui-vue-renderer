@@ -1,5 +1,8 @@
 <template>
   <div class="demo-app">
+    <!-- Toast notification -->
+    <div v-if="toast" class="demo-toast">{{ toast }}</div>
+
     <header class="demo-header">
       <h1>🦾 A2UI Vue Renderer — Demo</h1>
       <p>Vue 3 implementation of the A2UI Agent-to-User Interface protocol</p>
@@ -89,6 +92,7 @@ const activeTab = ref('flight')
 const lastAction = ref<UserActionMessage | null>(null)
 const customJsonl = ref('')
 const customMessages = ref<A2UIMessage[]>([])
+const toast = ref<string | null>(null)
 
 const tabs = [
   { id: 'flight',    label: '✈️ Flight Booking' },
@@ -100,6 +104,10 @@ const tabs = [
 function onAction(action: UserActionMessage) {
   lastAction.value = action
   console.log('[A2UI Demo] Action received:', action)
+
+  // Show toast notification
+  toast.value = `✅ Button clicked: ${action.actionId}`
+  setTimeout(() => { toast.value = null }, 3000)
 }
 
 function applyCustom() {
@@ -352,7 +360,19 @@ body {
   color: #212121;
 }
 
-.demo-app { max-width: 860px; margin: 0 auto; padding: 32px 20px 64px; }
+.demo-app { max-width: 860px; margin: 0 auto; padding: 32px 20px 64px; position: relative; }
+
+.demo-toast {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  background: #4CAF50; color: white; padding: 12px 24px;
+  border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  font-size: 15px; font-weight: 500; z-index: 9999;
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
 
 .demo-header { text-align: center; margin-bottom: 32px; }
 .demo-header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
