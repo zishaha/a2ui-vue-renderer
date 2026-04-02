@@ -20,11 +20,31 @@
     <div class="demo-body">
       <!-- Static messages demo -->
       <section v-if="activeTab === 'flight'" class="demo-section">
-        <h2>✈️ Flight Booking Form</h2>
-        <p class="demo-desc">
-          Simulates an Agent response that generates a flight booking UI.
-          Demonstrates: Column, Row, TextField, DateTimeInput, ChoicePicker, Button.
-        </p>
+        <div class="demo-header-section">
+          <h2>✈️ Flight Booking Form</h2>
+          <p class="demo-desc">
+            Simulates an Agent response that generates a flight booking UI with form inputs.
+          </p>
+        </div>
+
+        <div class="demo-features">
+          <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <div class="feature-title">Form Components</div>
+            <div class="feature-desc">TextField, DateTimeInput, ChoicePicker</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-title">Static Layout</div>
+            <div class="feature-desc">explicitList children with literal values</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔘</div>
+            <div class="feature-title">Action Handling</div>
+            <div class="feature-desc">Button with actionId for form submission</div>
+          </div>
+        </div>
+
         <div class="demo-renderer">
           <A2UIRenderer
             :messages="flightMessages"
@@ -36,11 +56,31 @@
 
       <!-- Product comparison demo -->
       <section v-if="activeTab === 'product'" class="demo-section">
-        <h2>🛍️ Product List (Dynamic Template)</h2>
-        <p class="demo-desc">
-          Demonstrates dynamic list rendering: a template component repeated
-          per item in a data model array (A2UI adjacency list + template children).
-        </p>
+        <div class="demo-header-section">
+          <h2>🛍️ Product List (Dynamic Template)</h2>
+          <p class="demo-desc">
+            Demonstrates dynamic list rendering from data arrays using template-based repetition.
+          </p>
+        </div>
+
+        <div class="demo-features">
+          <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <div class="feature-title">Template Children</div>
+            <div class="feature-desc">Repeat component per array item</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔗</div>
+            <div class="feature-title">Data Binding</div>
+            <div class="feature-desc">JSON Pointer paths to data model</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-title">Dynamic UI</div>
+            <div class="feature-desc">UI generated from data structure</div>
+          </div>
+        </div>
+
         <div class="demo-renderer">
           <A2UIRenderer
             :messages="productMessages"
@@ -51,11 +91,31 @@
 
       <!-- Data binding demo -->
       <section v-if="activeTab === 'form'" class="demo-section">
-        <h2>📝 Survey Form (Two-way Data Binding)</h2>
-        <p class="demo-desc">
-          Demonstrates two-way data binding: form fields update the local
-          data model, and bound Text components reflect changes live.
-        </p>
+        <div class="demo-header-section">
+          <h2>📝 Survey Form (Two-Way Binding)</h2>
+          <p class="demo-desc">
+            Demonstrates reactive data binding and real-time form state management.
+          </p>
+        </div>
+
+        <div class="demo-features">
+          <div class="feature-card">
+            <div class="feature-icon">↔️</div>
+            <div class="feature-title">Bidirectional Binding</div>
+            <div class="feature-desc">Form inputs sync with data model</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <div class="feature-title">Reactive Updates</div>
+            <div class="feature-desc">Live data model changes</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">✅</div>
+            <div class="feature-title">State Management</div>
+            <div class="feature-desc">Form validation and submission</div>
+          </div>
+        </div>
+
         <div class="demo-renderer">
           <A2UIRenderer
             :messages="surveyMessages"
@@ -397,6 +457,29 @@ body {
 .demo-tab.active { background: #1976d2; color: #fff; }
 
 .demo-section {}
+
+.demo-header-section { margin-bottom: 20px; }
+.demo-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: #1a1a1a; }
+.demo-desc { color: #666; font-size: 14px; line-height: 1.6; }
+
+.demo-features {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px; margin-bottom: 24px;
+}
+.feature-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white; padding: 16px; border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+.feature-icon { font-size: 28px; margin-bottom: 8px; }
+.feature-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.feature-desc { font-size: 12px; opacity: 0.9; line-height: 1.4; }
+
 .demo-section h2 { font-size: 18px; margin-bottom: 6px; }
 .demo-desc { color: #666; font-size: 13px; margin-bottom: 16px; line-height: 1.6; }
 
